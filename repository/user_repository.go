@@ -2,8 +2,8 @@ package repository
 
 import (
 	"context"
-	"database/sql"
 	"github.com/yoshinorihisakawa/sample-di/model"
+	"github.com/yoshinorihisakawa/sample-di/database"
 )
 
 type UserRepository interface {
@@ -11,13 +11,13 @@ type UserRepository interface {
 }
 
 type userRepository struct {
-	db sql.DB
+	db database.Database
 }
 
-func NewUserRepository(db *sql.DB) UserRepository {
+func NewUserRepository(db *database.Database) UserRepository {
 	return &userRepository{*db}
 }
 
 func (ur *userRepository) CreateUser(ctx context.Context, user *model.User) {
-	ur.db.Query("")
+	ur.db.Con().Query("")
 }
